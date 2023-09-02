@@ -1,0 +1,126 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+.main {
+    width: 100%;
+    height: 100vh;
+    background-color: #5D5FEF;
+    /*position: relative;*/
+    /*z-index: -1;*/
+}
+.sign-in-modal {
+    width: 650px;
+    height: 650px;
+    border-radius: 50px;
+    background-color: #ffffff;
+    position: relative;
+    margin: auto;
+    top: 30px;
+}
+.sign-in-input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.photo-smile {
+    display: flex;
+    justify-content: center;
+    padding-top: 40px;
+    margin-bottom: 20px;
+}
+.sign-in-field {
+    width: 335px;
+    height: 60px;
+    padding: 22px 10px 19px 10px;
+    border-radius: 8px;
+    border: 1px;
+    /*gap: 10px;*/
+    background: #F5F5F5;
+    font-family: Gotham Pro;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19px;
+    margin-top: 20px;
+}
+.dont-show-pass {
+    position: relative;
+    top: 6px;
+    right: 36px;
+    border: none;
+    background: url("../img/eye-disable.svg");
+    background-color: inherit;
+    width: 24px;
+    height: 24px;
+}
+.show-password {
+    position: relative;
+    top: 6px;
+    right: 36px;
+    border: none;
+    background: url("../img/eye.svg");
+    background-color: inherit;
+    width: 24px;
+    height: 24px;
+}
+.forgot-password-text {
+    margin-top: 15px;
+    width: 335px;
+    display: flex;
+    justify-content: end;
+}
+.forgot-password {
+    border: none;
+    background-color: inherit;
+    width: 121px;
+    height: 13px;
+    font-family: Gotham Pro;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 13px;
+}
+.not-active {
+    margin-top: 32px;
+    width: 335px;
+    height: 60px;
+    padding: 10px;
+    border-radius: 16px;
+    color: #9CA4AB;
+    cursor: pointer;
+    font-family: Gotham Pro;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 15px;
+    background-color: #F7F7F8;
+    border: none;
+}
+.active {
+    background-color: #5D5FEF;
+    margin-top: 32px;
+    width: 335px;
+    height: 60px;
+    padding: 10px;
+    border-radius: 16px;
+    color: #ffffff;
+    cursor: pointer;
+    font-family: Gotham Pro;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 15px;
+    border: none;
+}
+.start-use {
+    width: 335px;
+    height: 60px;
+    padding: 10px;
+    border: none;
+    background-color: inherit;
+    font-family: Gotham Pro;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 15px;
+    color: #5D5FEF;
+    margin-top: 65px;
+}
+
