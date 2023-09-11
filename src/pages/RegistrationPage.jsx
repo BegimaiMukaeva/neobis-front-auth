@@ -35,7 +35,7 @@ import axios from 'axios';
     }
 
     try {
-      const response = await axios.post('https://164.90.162.56:8000/auth/profile/', {
+      const response = await axios.post('http://164.90.162.56:8000/auth/profile/', {
       email,
       password,
       password2: confirmPassword
