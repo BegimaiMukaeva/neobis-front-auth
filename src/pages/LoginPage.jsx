@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Lorby from "../components/Lorby";
+import axios from 'axios';
+import api from "../services/api";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -30,28 +32,32 @@ const LoginPage = () => {
   }, [retryTime]);
 
 
- const checkDatabase = async (login, password) => {
+
+const checkDatabase = async (email, password) => {
     try {
-        const response = await fetch('/your-endpoint-for-login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ login, password })
+        const response = await api.post('/auth/', {
+            email: email,
+            password: password
         });
 
-        const data = await response.json();
-
-        if (data.success) {
+        if (response.data && response.data.access) {
+            localStorage.setItem("accessToken", response.data.access);
+            localStorage.setItem("refreshToken", response.data.refresh);
             return true;
         } else {
-            setLoginError(true);
-            setRetryTime(30);
-            return false;
+            throw new Error('Authentication failed');
         }
     } catch (error) {
-        console.error("Error during login:", error);
-        return false;
+        console.error("Error during authentication:", error);
+
+        if (error.response) {
+            console.error("Server error:", error.response.data);
+        } else if (error.request) {
+            console.error("No response received:", error.request);
+        } else {
+            console.error("Error creating the request:", error.message);
+        }
+        return null;
     }
 };
 
@@ -65,17 +71,6 @@ const handleSignIn = async (e) => {
       setRetryTime(30);
     }
 };
-
-
-  // const handleSignIn = (e) => {
-  //   e.preventDefault();
-  //   if (checkDatabase(login, password)) {
-  //     navigate('/successloginpage');
-  //   } else {
-  //     setLoginError(true);
-  //     setRetryTime(30);
-  //   }
-  // };
 
   return (
       <div className='container'>

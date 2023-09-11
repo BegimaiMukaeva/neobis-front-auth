@@ -3,6 +3,8 @@ import { useNavigate, Link } from 'react-router-dom';
 import Lorby from "../components/Lorby";
 import { EmailContext } from './ConfirmationPage';
 import BackImg from '../img/Frame 851211998.svg'
+import axios from 'axios';
+
 
 
   const RegistrationPage = () => {
@@ -27,24 +29,40 @@ import BackImg from '../img/Frame 851211998.svg'
     match: password === confirmPassword
   };
 
-  const handleSubmit = async () => {
-        if (!validateInputs()) {
-            return;
-        }
+    const handleSubmit = async () => {
+    if (!validateInputs()) {
+      return;
+    }
 
-    const response = await fetch('/your-server-endpoint', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, login, password })
+    try {
+      const response = await axios.post('http://164.90.162.56:8000/auth/profile/', {
+      email,
+      password,
+      password2: confirmPassword
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
+        'accept': 'application/json',
+      }
     });
 
-    if (response.ok) {
-      navigate('/new-password/send-email-message', { state: { email } });
-    } else {
-      const errorData = await response.json();
-            setError(errorData.message);
+      if (response.status === 200) {
+        navigate('/new-password/send-email-message', { state: { email } });
+      } else {
+        setError("Произошла ошибка при регистрации.");
+      }
+
+    } catch (error) {
+      if (error.response) {
+        setError(error.response.data.message || "Ошибка сервера при регистрации.");
+      } else if (error.request) {
+        setError("Сервер не отвечает.");
+      } else {
+        setError("Ошибка при создании запроса.");
+      }
     }
   };
+
 
     const isValidEmail = (email) => {
       const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
