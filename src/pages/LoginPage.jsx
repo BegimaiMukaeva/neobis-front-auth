@@ -84,7 +84,7 @@ const handleSignIn = async (e) => {
               <input
                 className='sign-in-input'
                 type="text"
-                placeholder="Введи туда-сюда адрес электронной почты"
+                placeholder="Введи туда-сюда адрес почты"
                 value={login}
                 onChange={e => setLogin(e.target.value)}
                 required

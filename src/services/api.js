@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'http://164.90.162.56:8000/'
+    baseURL: 'https://164.90.162.56:8000/'
 });
 
 const refreshToken = async () => {
