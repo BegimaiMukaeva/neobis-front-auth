@@ -22,8 +22,9 @@ const ConfirmationPage = () => {
                 </div>
                 <div className='confirmation-page'>
                     <div className='back'>
-                        <img src={BackImg} alt=""/>
-                        <Link className='button-back' to="/new-password">Назад</Link>
+                        <Link className='button-back' to="/new-password">
+                            <img src={BackImg} alt=""/>
+                            Назад</Link>
                     </div>
                     <h2 className='confirmation-page__title'>Выслали письмо со ссылкой для завершения регистрации на {email}</h2>
                     <p className='confirmation-page__paragraph'>Если письмо не пришло, не <br/> спеши ждать совиную почту - <br/> лучше <span className='confirmation-page__spam'>проверь ящик “Спам”</span> <p className='confirmation-page__spam'> (´｡• ω •｡`)</p></p>

@@ -35,10 +35,16 @@ const LoginPage = () => {
 
 const checkDatabase = async (email, password) => {
     try {
-        const response = await api.post('/auth/', {
-            email: email,
-            password: password
+        const response = await axios.post('http://ishak-backender.org.kg/auth/', {
+           email,
+           password
+        }, {
+           headers: {
+             'Content-Type': 'application/json',
+             'accept': 'application/json',
+           }
         });
+
 
         if (response.data && response.data.access) {
             localStorage.setItem("accessToken", response.data.access);

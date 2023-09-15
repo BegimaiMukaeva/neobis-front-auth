@@ -35,16 +35,17 @@ import axios from 'axios';
     }
 
     try {
-      const response = await axios.post('http://164.90.162.56:8000/auth/profile/', {
-      email,
-      password,
-      password2: confirmPassword
+      const response = await axios.post('http://ishak-backender.org.kg/auth/profile/', {
+       email,
+       password,
+       password2: confirmPassword
     }, {
-      headers: {
-        'Content-Type': 'application/json',
-        'accept': 'application/json',
-      }
+       headers: {
+         'Content-Type': 'application/json',
+         'accept': 'application/json',
+       }
     });
+
 
       if (response.status === 200) {
         navigate('/new-password/send-email-message', { state: { email } });

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'http://164.90.162.56:8000/'
+    baseURL: 'http://ishak-backender.org.kg/'
 });
 
 const refreshToken = async () => {
@@ -12,7 +12,7 @@ const refreshToken = async () => {
             return null;
         }
 
-        const response = await api.post('/auth/api/refresh/', {
+        const response = await axios.post('http://ishak-backender.org.kg/auth/api/refresh/', {
             refresh: storedRefreshToken
         });
 
