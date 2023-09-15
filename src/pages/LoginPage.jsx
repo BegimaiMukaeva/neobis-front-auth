@@ -35,7 +35,7 @@ const LoginPage = () => {
 
 const checkDatabase = async (email, password) => {
     try {
-        const response = await axios.post('http://ishak-backender.org.kg/auth/', {
+        const response = await axios.post('https://ishak-backender.org.kg/auth/', {
            email,
            password
         }, {
@@ -74,7 +74,7 @@ const handleSignIn = async (e) => {
         navigate('/home-page');
     } else {
       setLoginError(true);
-      setRetryTime(30);
+      setRetryTime(10);
     }
 };
 

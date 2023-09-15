@@ -35,7 +35,7 @@ import axios from 'axios';
     }
 
     try {
-      const response = await axios.post('http://ishak-backender.org.kg/auth/profile/', {
+      const response = await axios.post('https://ishak-backender.org.kg/auth/profile/', {
        email,
        password,
        password2: confirmPassword
@@ -92,8 +92,9 @@ import axios from 'axios';
         </div>
         <div className='registration-modal'>
             <div className='back'>
-                <img src={BackImg} alt=""/>
-                <Link className='button-back' to="/">Назад</Link>
+                <Link className='button-back' to="/">
+                    <img src={BackImg} alt=""/>
+                    Назад</Link>
             </div>
           <h2 className='registration__title'>Создать аккаунт Lorby</h2>
 
