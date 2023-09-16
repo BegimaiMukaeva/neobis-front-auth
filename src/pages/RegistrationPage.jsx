@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useContext } from 'react';
+import React, { useState , useEffect , useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import Lorby from "../components/Lorby";
 import { EmailContext } from './ConfirmationPage';
@@ -7,10 +7,9 @@ import axios from 'axios';
 
 
 
-  const RegistrationPage = () => {
-    const [email, setEmail] = useContext(EmailContext);
-
-    const navigate = useNavigate();
+const RegistrationPage = () => {
+  const [email, setEmail] = useContext(EmailContext);
+  const navigate = useNavigate();
 
   const [emailError, setEmailError] = useState('');
   const [login, setLogin] = useState('');
@@ -19,6 +18,7 @@ import axios from 'axios';
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState('');
+
 
   const passwordValidations = {
     length: password.length >= 8 && password.length <= 15,
@@ -30,47 +30,54 @@ import axios from 'axios';
   };
 
     const handleSubmit = async () => {
-    if (!validateInputs()) {
-      return;
-    }
+        if (!validateInputs()) {
+          return;
+        }
 
-    try {
-      const response = await axios.post('https://ishak-backender.org.kg/auth/profile/', {
-       email,
-       password,
-       password2: confirmPassword
-    }, {
-       headers: {
-         'Content-Type': 'application/json',
-         'accept': 'application/json',
-       }
-    });
+        try {
+          const response = await axios.post('https://ishak-backender.org.kg/auth/profile/', {
+           email,
+           password,
+           password2: confirmPassword
+          }, {
+           headers: {
+             'Content-Type': 'application/json',
+             'accept': 'application/json',
+           }
+          });
 
+          if (response.status === 200) {
+            setEmail('');
+            setLogin('');
+            setPassword('');
+            setConfirmPassword('');
 
-      if (response.status === 200) {
-        navigate('/new-password/send-email-message', { state: { email } });
-      } else {
-        setError("Произошла ошибка при регистрации.");
-      }
+            navigate('/new-password/send-email-message', { state: { email } });
+          } else {
+            setError("Произошла ошибка при регистрации.");
+          }
 
-    } catch (error) {
-      if (error.response) {
-        setError(error.response.data.message || "Ошибка сервера при регистрации.");
-      } else if (error.request) {
-        setError("Сервер не отвечает.");
-      } else {
-        setError("Ошибка при создании запроса.");
-      }
-    }
-  };
-
+        } catch (error) {
+          if (error.response) {
+            setError(error.response.data.message || "Ошибка сервера при регистрации.");
+          } else if (error.request) {
+            setError("Сервер не отвечает.");
+          } else {
+            setError("Ошибка при создании запроса.");
+          }
+        }
+    };
 
     const isValidEmail = (email) => {
       const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
       return regex.test(email);
     }
 
-    const isButtonDisabled = !isValidEmail(email) || !login || !password || !confirmPassword || (password !== confirmPassword);
+    const areAllValidationsTrue = (validations) => {
+        return Object.values(validations).every(val => val);
+    }
+
+    const isButtonDisabled = !isValidEmail(email) || !login || !password || !confirmPassword || (password !== confirmPassword) || !areAllValidationsTrue(passwordValidations);
 
     const validateInputs = () => {
         if (!email.includes('@') || !email.includes('.')) {
