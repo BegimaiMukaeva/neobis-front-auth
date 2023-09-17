@@ -5,8 +5,6 @@ import { EmailContext } from './ConfirmationPage';
 import BackImg from '../img/Frame 851211998.svg'
 import axios from 'axios';
 
-
-
 const RegistrationPage = () => {
   const [email, setEmail] = useContext(EmailContext);
   const navigate = useNavigate();
